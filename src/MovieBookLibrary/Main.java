@@ -1,8 +1,6 @@
 package MovieBookLibrary;
 import java.util.*;
 
-import examinerandeUppgifter.mineSweeper.Command;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -28,5 +26,14 @@ public class Main {
 
 		
 
+	}
+	
+	public static Command parseCommand(String userInput) {
+		String command = userInput;
+		switch (command) {
+		case "quit":
+			return Command.QUIT;
+		}
+	return null;
 	}
 }
