@@ -21,5 +21,5 @@ public class Books extends Item {
 	public void setLength(int pages) {
 		this.pages = pages;
 	}
-	//arraylist
+	//arraylists
 }
