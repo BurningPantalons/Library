@@ -10,4 +10,5 @@ public enum Command {
 	LIST,
 	INFO,
 	QUIT,
+	UNKNOWN,
 }

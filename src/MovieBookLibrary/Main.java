@@ -31,9 +31,31 @@ public class Main {
 	public static Command parseCommand(String userInput) {
 		String command = userInput;
 		switch (command) {
+
+		case "register":
+			return Command.REGISTER;
+
+		case "deregister":
+			return Command.DEREGISTER;
+
+		case "checkout":
+			return Command.CHECKOUT;
+
+		case "checkin":
+			return Command.CHECKIN;
+
+		case "help":
+			return Command.HELP;
+
+		case "list":
+			return Command.LIST;
+
+		case "info":
+			return Command.INFO;
+
 		case "quit":
 			return Command.QUIT;
 		}
-	return null;
+		return null;
 	}
 }
