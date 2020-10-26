@@ -1,22 +1,18 @@
 package MovieBookLibrary;
 import java.util.ArrayList;
 
-public class Books extends Item {
+public class Book extends Item {
 
 	private String author;
 	private int pages;
 	
-	public ArrayList bookList = new ArrayList();
-
+	//ArrayList bookList = new ArrayList();
+	//Book book = new Book();
 	
-	public void register(String author, int pages) {
-		
+	public Book(int id, String title, int value, String author, int pages) {
+		super(id, title, value);
 		setAuthor(author);
 		setPages(pages);
-	}
-
-	Books() { // id, title, value, author, pages
-
 	}
 
 	public String getAuthor() {

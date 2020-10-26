@@ -7,8 +7,8 @@ public abstract class Item {
 	protected int value;
 
 	
-	public void register(int Id, String title, int value) {
-		setId(Id);
+	public Item(int id, String title, int value) {
+		setId(id);
 		setTitle(title);
 		setValue(value);	
 	}
