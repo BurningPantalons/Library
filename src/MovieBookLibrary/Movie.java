@@ -1,12 +1,14 @@
 package MovieBookLibrary;
 
-public class Movies extends Item {
+public class Movie extends Item {
 
 	private float rating;
 	private int length;
 	
-	Movies(){ //id, title, value, rating, length
-		
+	public Movie(int id, String title, int value, float rating, int length) {
+		super(id, title, value);
+		setRating(rating);
+		setLength(length);
 	}
 	
 	public float getRating() {
