@@ -1,14 +1,11 @@
 package MovieBookLibrary;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Book extends Item {
 
 	private String author;
 	private int pages;
-
-	
-	
 
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);

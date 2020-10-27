@@ -14,8 +14,7 @@ public class Main {
 			Command command = parseCommand(userInput);
 
 			if (command == Command.REGISTER) {
-				System.out.println(
-						"What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
+				System.out.println("What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
 
 				try {
 					String bookOrMovie = scanner.next();
@@ -28,11 +27,32 @@ public class Main {
 						continue;
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					return;
 				}
 			}
 
 			if (command == Command.DEREGISTER) {
+				System.out.println("Deregister item:\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
+				
+				try {
+					String bookOrMovie = scanner.next(); //antingen gör man två metoder som i register, eller så gör man en metod som letar i bägge listorna. förmodligen det andra alternativet.
+					if (bookOrMovie.equals("b")) {
+						System.out.println("Deleting book");
+						//regBook();
+						System.exit(0);
+					} else if (bookOrMovie.equals("m")) {
+						System.out.println("Deleting movie");
+						//regMovie();
+						System.exit(0);
+					} else {
+						printUnknownCommand();
+						continue;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					return;
+				}
 			}
 
 			if (command == Command.CHECKOUT) {
@@ -115,7 +135,7 @@ public class Main {
 
 		// System.exit(0);
 		// bParameter.close();
-		return;
+		
 	}
 
 	public static void regMovie() {
@@ -125,7 +145,6 @@ public class Main {
 		movieList.add(new Movie(0, null, 0, 0, 0));
 		// System.exit(0);
 		// mParameter.close();
-		return;
 	}
 
 	public static void printUnknownCommand() {
