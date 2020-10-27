@@ -20,11 +20,9 @@ public class Main {
 				try {
 					String bookOrMovie = scanner.next();
 					if (bookOrMovie.equals("b")) {
-						System.out.println("you are creating a new book.");
-						System.exit(0);
+						regBook();
 					} else if (bookOrMovie.equals("m")) {
-						System.out.println("you are creating a new movie.");
-						System.exit(0);
+						regMovie();
 					} else {
 						printUnknownCommand();
 						continue;
@@ -49,6 +47,7 @@ public class Main {
 			}
 
 			if (command == Command.LIST) {
+
 			}
 
 			if (command == Command.INFO) {
@@ -79,6 +78,7 @@ public class Main {
 		switch (command) {
 
 		case "register":
+		case "r":
 			return Command.REGISTER;
 
 		case "deregister":
@@ -91,6 +91,7 @@ public class Main {
 			return Command.CHECKIN;
 
 		case "help":
+		case "h":
 			return Command.HELP;
 
 		case "list":
@@ -100,23 +101,45 @@ public class Main {
 			return Command.INFO;
 
 		case "quit":
-		case "q":	
+		case "q":
 			return Command.QUIT;
 		}
 		return Command.UNKNOWN;
+	}
+
+	public static void regBook() {
+		System.out.println("Book: enter id, title, value(sek), author, pages.");
+		// Scanner bParameter = new Scanner(System.in);
+		ArrayList<Book> bookList = new ArrayList<Book>();
+		bookList.add(new Book(0, null, 0, null, 0));
+
+		// System.exit(0);
+		// bParameter.close();
+		return;
+	}
+
+	public static void regMovie() {
+		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
+		// Scanner mParameter = new Scanner(System.in);
+		ArrayList<Movie> movieList = new ArrayList<Movie>();
+		movieList.add(new Movie(0, null, 0, 0, 0));
+		// System.exit(0);
+		// mParameter.close();
+		return;
 	}
 
 	public static void printUnknownCommand() {
 		System.out.println("Unknown command, please try again");
 		return;
 	}
+
 	public static void printHelp() {
 		System.out.println("helptext");
 	}
-	
+
 	public static void quit() {
 		System.out.print("Exiting program.");
 		System.exit(0);
 	}
-		
+
 }

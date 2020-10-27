@@ -1,14 +1,15 @@
 package MovieBookLibrary;
+
 import java.util.ArrayList;
 
 public class Book extends Item {
 
 	private String author;
 	private int pages;
+
 	
-	//ArrayList bookList = new ArrayList();
-	//Book book = new Book();
 	
+
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);
 		setAuthor(author);
@@ -30,5 +31,5 @@ public class Book extends Item {
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
-	// arraylists
+
 }

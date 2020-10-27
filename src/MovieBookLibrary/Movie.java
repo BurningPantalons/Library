@@ -3,12 +3,12 @@ package MovieBookLibrary;
 public class Movie extends Item {
 
 	private float rating;
-	private int length;
+	private int runtime;
 	
-	public Movie(int id, String title, int value, float rating, int length) {
+	public Movie(int id, String title, int value, float rating, int runtime) {
 		super(id, title, value);
 		setRating(rating);
-		setLength(length);
+		setRuntime(runtime);
 	}
 	
 	public float getRating() {
@@ -17,11 +17,11 @@ public class Movie extends Item {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public int getLength() {
-		return length;
+	public int getRuntime() {
+		return runtime;
 	}
-	public void setLength(int length) {
-		this.length = length;
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
 	}
 	//Arraylist
 }
