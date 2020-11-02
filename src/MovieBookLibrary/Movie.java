@@ -18,5 +18,8 @@ public class Movie extends Item {
 	public int getRuntime() {
 		return runtime;
 	}
-	
+	@Override
+	public String toString() {
+		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Rating: %.2f, Runtime: %d", id, title, value, rating, runtime);
+	}
 }

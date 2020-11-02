@@ -20,5 +20,9 @@ public class Book extends Item {
 	public int getPages() {
 		return nPages;
 	}
-
+	
+	@Override
+	public String toString() {
+		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", id, title, value, author, nPages);
+	}
 }
