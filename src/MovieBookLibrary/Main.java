@@ -3,14 +3,20 @@ package MovieBookLibrary;
 import java.util.*;
 
 public class Main {
+	/*
+	 * läsa in csv.filer när programmet startar parseCommand som tar reda på rätt
+	 * kommando och kallar på metod switch för Book(b) och Movie(m) list() som visar
+	 * en lista på Böcker och Filmer och ifall dom är utlånade (till specificerad
+	 * kund)
+	 */
 
 	public static void main(String[] args) throws Exception {
 
 		boolean running = true;
-		
+		Scanner scanner = new Scanner(System.in);
 
 		while (running) {
-			Scanner scanner = new Scanner(System.in);
+
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
 
@@ -85,16 +91,9 @@ public class Main {
 				printUnknownCommand();
 				continue;
 			}
-			scanner.close();
+			
 		}
-
-		/*
-		 * läsa in csv.filer när programmet startar parseCommand som tar reda på rätt
-		 * kommando och kallar på metod switch för Book(b) och Movie(m) list() som visar
-		 * en lista på Böcker och Filmer och ifall dom är utlånade (till specificerad
-		 * kund)
-		 */
-
+		scanner.close();
 	}
 
 	public static Command parseCommand(String userInput) {
@@ -126,12 +125,12 @@ public class Main {
 
 		case "quit":
 		case "q":
-		case "exit":	
+		case "exit":
 			return Command.QUIT;
-			default:
-				return Command.UNKNOWN;
+		default:
+			return Command.UNKNOWN;
 		}
-		
+
 	}
 
 	public static void deleteItem() {

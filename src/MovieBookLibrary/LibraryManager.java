@@ -12,6 +12,7 @@ public class LibraryManager extends Main{
 	static String Not_Available;
 	static String In_Stock;
 	static String Does_Not_Exist;
+	
 
 //	checkout	<artikelnummer>	
 //	Startar en dialog i konsolen som låter användaren ange ett namn och ett telefonnummer 
@@ -49,9 +50,34 @@ public class LibraryManager extends Main{
 		Book book = new Book(id, title, value, author, nPages);
 		System.out.println(book);
 		bookList.add(book);
-		// System.exit(0);
 		return;
 	}
+//	public static void regBook() { //försöker efterlikna oscars exempel här
+//		Scanner scanner = new Scanner(System.in);
+//		System.out.println("Book:\nEnter id:\n>");
+//		String userInput = scanner.next();
+//		String[] tempBook = new String[id, title, value, author, nPages];
+//		try {
+//		int id = Integer.toString(userInput);
+//		System.out.println("\nEnter title:\n>");
+//		title = userInput;
+//		System.out.println("\nEnter value:\n>");
+//		value = Integer.parseInt(userInput);
+//		System.out.println("\nEnter author:\n>");
+//		author = userInput;
+//		System.out.println("\nEnter number of pages:\n>");
+//		nPages = Integer.parseInt(userInput);
+//		} catch (Exception e) {
+//			System.out.println("Failed to parse all attributes for a book.\nTry again.\n>");
+//			regBook();
+//		}
+//		
+//		Book book = new Book(id, title, value, author, nPages);
+//		System.out.println(book);
+//		bookList.add(book);
+//		// System.exit(0);
+//		return;
+//	}
 	
 	public static void regMovie() {
 		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
@@ -75,7 +101,6 @@ public class LibraryManager extends Main{
 		Movie movie = new Movie(id, title, value, rating, runtime);
 		System.out.println(movie);
 		movieList.add(movie);
-		// System.exit(0);
 		return;
 	}
 	
