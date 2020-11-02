@@ -3,25 +3,33 @@ package MovieBookLibrary;
 import java.util.*;
 
 public class Main {
+	/*
+	 * läsa in csv.filer när programmet startar parseCommand som tar reda på rätt
+	 * kommando och kallar på metod switch för Book(b) och Movie(m) list() som visar
+	 * en lista på Böcker och Filmer och ifall dom är utlånade (till specificerad
+	 * kund)
+	 */
 
 	public static void main(String[] args) throws Exception {
 
+		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
 
-		while (true) {
+		while (running) {
 
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
 
 			if (command == Command.REGISTER) {
-				System.out.println("What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
+				System.out.println(
+						"What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
 
 				try {
 					String bookOrMovie = scanner.next();
 					if (bookOrMovie.equals("b")) {
-						regBook();
+						LibraryManager.regBook();
 					} else if (bookOrMovie.equals("m")) {
-						regMovie();
+						LibraryManager.regMovie();
 					} else {
 						printUnknownCommand();
 						continue;
@@ -34,16 +42,18 @@ public class Main {
 
 			if (command == Command.DEREGISTER) {
 				System.out.println("Deregister item:\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
-				
+
 				try {
-					String bookOrMovie = scanner.next(); //antingen gör man två metoder som i register, eller så gör man en metod som letar i bägge listorna. förmodligen det andra alternativet.
+					String bookOrMovie = scanner.next(); // antingen gör man två metoder som i register, eller så gör
+															// man en metod som letar i bägge listorna. förmodligen det
+															// andra alternativet.
 					if (bookOrMovie.equals("b")) {
-						System.out.println("Deleting book");
-						//regBook();
+						System.out.println("Enter book id you wish to remove");
+
 						System.exit(0);
 					} else if (bookOrMovie.equals("m")) {
-						System.out.println("Deleting movie");
-						//regMovie();
+						System.out.println("Enter movie id you wish to remove");
+
 						System.exit(0);
 					} else {
 						printUnknownCommand();
@@ -67,7 +77,7 @@ public class Main {
 			}
 
 			if (command == Command.LIST) {
-
+				printList();
 			}
 
 			if (command == Command.INFO) {
@@ -81,16 +91,9 @@ public class Main {
 				printUnknownCommand();
 				continue;
 			}
-			scanner.close();
+			
 		}
-
-		/*
-		 * läsa in csv.filer när programmet startar parseCommand som tar reda på rätt
-		 * kommando och kallar på metod switch för Book(b) och Movie(m) list() som visar
-		 * en lista på Böcker och Filmer och ifall dom är utlånade (till specificerad
-		 * kund)
-		 */
-
+		scanner.close();
 	}
 
 	public static Command parseCommand(String userInput) {
@@ -122,29 +125,26 @@ public class Main {
 
 		case "quit":
 		case "q":
+		case "exit":
 			return Command.QUIT;
+		default:
+			return Command.UNKNOWN;
 		}
-		return Command.UNKNOWN;
+
 	}
 
-	public static void regBook() {
-		System.out.println("Book: enter id, title, value(sek), author, pages.");
-		// Scanner bParameter = new Scanner(System.in);
-		ArrayList<Book> bookList = new ArrayList<Book>();
-		bookList.add(new Book(0, null, 0, null, 0));
-
-		// System.exit(0);
-		// bParameter.close();
-		
+	public static void deleteItem() {
+		/*
+		 * läser i både bookList och movieList efter id.nr och tar bort det ur
+		 * arraylistan
+		 */
 	}
 
-	public static void regMovie() {
-		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
-		// Scanner mParameter = new Scanner(System.in);
-		ArrayList<Movie> movieList = new ArrayList<Movie>();
-		movieList.add(new Movie(0, null, 0, 0, 0));
-		// System.exit(0);
-		// mParameter.close();
+	public static void printList() {
+		/*
+		 * Skriver ut arraylistorna med variabel-namn: + värde
+		 */
+
 	}
 
 	public static void printUnknownCommand() {
