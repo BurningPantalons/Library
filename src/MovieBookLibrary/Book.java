@@ -5,7 +5,7 @@ import java.util.*;
 public class Book extends Item {
 
 	private String author;
-	private int pages;
+	private int nPages;
 
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);
@@ -22,11 +22,11 @@ public class Book extends Item {
 	}
 
 	public int getPages() {
-		return pages;
+		return nPages;
 	}
 
 	public void setPages(int pages) {
-		this.pages = pages;
+		this.nPages = pages;
 	}
 
 }

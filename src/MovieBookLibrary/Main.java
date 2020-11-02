@@ -14,7 +14,8 @@ public class Main {
 			Command command = parseCommand(userInput);
 
 			if (command == Command.REGISTER) {
-				System.out.println("What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
+				System.out.println(
+						"What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
 
 				try {
 					String bookOrMovie = scanner.next();
@@ -34,16 +35,18 @@ public class Main {
 
 			if (command == Command.DEREGISTER) {
 				System.out.println("Deregister item:\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
-				
+
 				try {
-					String bookOrMovie = scanner.next(); //antingen gör man två metoder som i register, eller så gör man en metod som letar i bägge listorna. förmodligen det andra alternativet.
+					String bookOrMovie = scanner.next(); // antingen gör man två metoder som i register, eller så gör
+															// man en metod som letar i bägge listorna. förmodligen det
+															// andra alternativet.
 					if (bookOrMovie.equals("b")) {
 						System.out.println("Deleting book");
-						//regBook();
+						
 						System.exit(0);
 					} else if (bookOrMovie.equals("m")) {
 						System.out.println("Deleting movie");
-						//regMovie();
+						
 						System.exit(0);
 					} else {
 						printUnknownCommand();
@@ -67,7 +70,7 @@ public class Main {
 			}
 
 			if (command == Command.LIST) {
-
+				printList();
 			}
 
 			if (command == Command.INFO) {
@@ -135,7 +138,7 @@ public class Main {
 
 		// System.exit(0);
 		// bParameter.close();
-		
+
 	}
 
 	public static void regMovie() {
@@ -147,6 +150,20 @@ public class Main {
 		// mParameter.close();
 	}
 
+	public static void deleteItem() {
+		/*
+		 * läser i både bookList och movieList efter id.nr
+		 * och tar bort det ur arraylistan
+		 */
+	}
+	
+	public static void printList() {
+		/* 
+		 * Skriver ut arraylistorna med variabel-namn: + värde
+		 */
+		
+	}
+	
 	public static void printUnknownCommand() {
 		System.out.println("Unknown command, please try again");
 		return;
