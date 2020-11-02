@@ -20,9 +20,18 @@ public class Book extends Item {
 	public int getPages() {
 		return nPages;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", id, title, value, author, nPages);
+		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", id, title, value, author,
+				nPages);
+	}
+
+	public String bookCsvRecord() {
+		return String.format("%d,%s,%d,%s,%d", id, title, value, author, nPages);
+	}
+
+	public static String getBookCsvHeaderString() {
+		return "id,title,value (Sek),author,number_of_pages";
 	}
 }

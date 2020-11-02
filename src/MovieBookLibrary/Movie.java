@@ -24,4 +24,12 @@ public class Movie extends Item {
 		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Rating: %.2f, Runtime: %dmin", id, title, value,
 				rating, runtime);
 	}
+
+	public String movieCsvRecord() {
+		return String.format("%d,%s,%d,%.2f,%d", id, title, value, rating, runtime);
+	}
+
+	public static String getMovieCsvHeaderString() {
+		return "id,title,value (Sek),imdb_rating,runtime (minutes)";
+	}
 }
