@@ -157,10 +157,27 @@ public class Main {
 
 	public static void regMovie() {
 		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
-		// Scanner mParameter = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+		String userInput = scanner.nextLine();
+		String[] arguments = userInput.split(", ");
+		int id = 0, value = 0, runtime = 0;
+		String title = null;
+		float rating = 0f;
 
+		try {
+			id = Integer.parseInt(arguments[0]);
+			title = arguments[1];
+			value = Integer.parseInt(arguments[2]);
+			rating = Float.parseFloat(arguments[3]);
+			runtime = Integer.parseInt(arguments[4]);
+		} catch (Exception e) {
+			System.out.println("Failed to parse all attributes for a movie.\nTry again.\n");
+			regMovie();
+		}
+		Movie movie = new Movie(id, title, value, rating, runtime);
+		System.out.println(movie);
+		scanner.close();
 		// System.exit(0);
-
 	}
 
 	public static void deleteItem() {
