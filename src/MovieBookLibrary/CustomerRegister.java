@@ -1,6 +1,24 @@
 package MovieBookLibrary;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomerRegister {
+
+	Map<String, Integer> register = new HashMap<String, Integer>();
+
+	public void addCustomer(String[] arguments) {
+		String name = null;
+		int phone = 0;
+
+		try {
+			name = arguments[0];
+			phone = Integer.parseInt(arguments[1]);
+		} catch (Exception e) {
+			System.out.println("Failed to parse arguments correctly.");
+		}
+		register.put(arguments[0], Integer.parseInt(arguments[1]));
+	}
 
 //	private String name;
 //	private int phoneNo;
@@ -17,7 +35,7 @@ public class CustomerRegister {
 //	public void setPhoneNo(int phoneNo) {
 //		this.phoneNo = phoneNo;
 //	}
-	
-	//HASHMAP String, Int
-	
+
+	// HASHMAP String, Int
+
 }

@@ -1,6 +1,7 @@
 package MovieBookLibrary;
 
 import java.util.ArrayList;
+import java.util.List;
 
 enum ItemState {
 
@@ -15,11 +16,14 @@ public class LibraryManager extends Main{
 	 * 
 	 * 
 	 */
-	ArrayList<Book> bookList = new ArrayList<Book>();
-	ArrayList<Movie> movieList = new ArrayList<Movie>();
+	List<Book> bookList = new ArrayList<Book>();
+	List<Movie> movieList = new ArrayList<Movie>();
 
-	public static void addBook(Book book){
-		
-	
-	}
+//	public static <E> void add(E product) {
+//		
+//		if (product = book) {
+//			bookList.add(product);
+//		}
+//	
+//	}
 }

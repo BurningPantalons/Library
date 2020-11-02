@@ -42,11 +42,11 @@ public class Main {
 															// man en metod som letar i bägge listorna. förmodligen det
 															// andra alternativet.
 					if (bookOrMovie.equals("b")) {
-						System.out.println("Deleting book");
+						System.out.println("Enter book id you wish to remove");
 
 						System.exit(0);
 					} else if (bookOrMovie.equals("m")) {
-						System.out.println("Deleting movie");
+						System.out.println("Enter movie id you wish to remove");
 
 						System.exit(0);
 					} else {
@@ -126,9 +126,12 @@ public class Main {
 
 		case "quit":
 		case "q":
+		case "exit":	
 			return Command.QUIT;
+			default:
+				return Command.UNKNOWN;
 		}
-		return Command.UNKNOWN;
+		
 	}
 
 	public static void regBook() {
@@ -152,6 +155,7 @@ public class Main {
 		Book book = new Book(id, title, value, author, nPages);
 		System.out.println(book);
 		scanner.close();
+		//LibraryManager.add(book);
 		// System.exit(0);
 	}
 
