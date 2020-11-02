@@ -5,10 +5,12 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
+		
+		
+		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
 
-		while (true) {
+		while (running) {
 
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
