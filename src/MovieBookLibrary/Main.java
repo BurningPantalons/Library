@@ -5,8 +5,7 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		
-		
+
 		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
 
@@ -44,11 +43,11 @@ public class Main {
 															// andra alternativet.
 					if (bookOrMovie.equals("b")) {
 						System.out.println("Deleting book");
-						
+
 						System.exit(0);
 					} else if (bookOrMovie.equals("m")) {
 						System.out.println("Deleting movie");
-						
+
 						System.exit(0);
 					} else {
 						printUnknownCommand();
@@ -135,37 +134,33 @@ public class Main {
 	public static void regBook() {
 		System.out.println("Book: enter id, title, value(sek), author, pages.");
 		// Scanner bParameter = new Scanner(System.in);
-		ArrayList<Book> bookList = new ArrayList<Book>();
-		bookList.add(new Book(0, null, 0, null, 0));
 
 		// System.exit(0);
-		// bParameter.close();
 
 	}
 
 	public static void regMovie() {
 		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
 		// Scanner mParameter = new Scanner(System.in);
-		ArrayList<Movie> movieList = new ArrayList<Movie>();
-		movieList.add(new Movie(0, null, 0, 0, 0));
+
 		// System.exit(0);
-		// mParameter.close();
+
 	}
 
 	public static void deleteItem() {
 		/*
-		 * läser i både bookList och movieList efter id.nr
-		 * och tar bort det ur arraylistan
+		 * läser i både bookList och movieList efter id.nr och tar bort det ur
+		 * arraylistan
 		 */
 	}
-	
+
 	public static void printList() {
-		/* 
+		/*
 		 * Skriver ut arraylistorna med variabel-namn: + värde
 		 */
-		
+
 	}
-	
+
 	public static void printUnknownCommand() {
 		System.out.println("Unknown command, please try again");
 		return;
