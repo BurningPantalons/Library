@@ -7,10 +7,10 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		boolean running = true;
-		Scanner scanner = new Scanner(System.in);
+		
 
 		while (running) {
-
+			Scanner scanner = new Scanner(System.in);
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
 
@@ -21,9 +21,9 @@ public class Main {
 				try {
 					String bookOrMovie = scanner.next();
 					if (bookOrMovie.equals("b")) {
-						regBook();
+						LibraryManager.regBook();
 					} else if (bookOrMovie.equals("m")) {
-						regMovie();
+						LibraryManager.regMovie();
 					} else {
 						printUnknownCommand();
 						continue;
@@ -132,56 +132,6 @@ public class Main {
 				return Command.UNKNOWN;
 		}
 		
-	}
-
-	public static void regBook() {
-		System.out.println("Book: enter id, title, value(sek), author, pages.");
-		Scanner scanner = new Scanner(System.in);
-		String userInput = scanner.nextLine();
-		String[] arguments = userInput.split(", ");
-		int id = 0, value = 0, nPages = 0;
-		String title = null, author = null;
-
-		try {
-			id = Integer.parseInt(arguments[0]);
-			title = arguments[1];
-			value = Integer.parseInt(arguments[2]);
-			author = arguments[3];
-			nPages = Integer.parseInt(arguments[4]);
-		} catch (Exception e) {
-			System.out.println("Failed to parse all attributes for a book.\nTry again.\n");
-			regBook();
-		}
-		Book book = new Book(id, title, value, author, nPages);
-		System.out.println(book);
-		scanner.close();
-		//LibraryManager.add(book);
-		// System.exit(0);
-	}
-
-	public static void regMovie() {
-		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
-		Scanner scanner = new Scanner(System.in);
-		String userInput = scanner.nextLine();
-		String[] arguments = userInput.split(", ");
-		int id = 0, value = 0, runtime = 0;
-		String title = null;
-		float rating = 0f;
-
-		try {
-			id = Integer.parseInt(arguments[0]);
-			title = arguments[1];
-			value = Integer.parseInt(arguments[2]);
-			rating = Float.parseFloat(arguments[3]);
-			runtime = Integer.parseInt(arguments[4]);
-		} catch (Exception e) {
-			System.out.println("Failed to parse all attributes for a movie.\nTry again.\n");
-			regMovie();
-		}
-		Movie movie = new Movie(id, title, value, rating, runtime);
-		System.out.println(movie);
-		scanner.close();
-		// System.exit(0);
 	}
 
 	public static void deleteItem() {
