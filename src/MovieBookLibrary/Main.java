@@ -133,10 +133,26 @@ public class Main {
 
 	public static void regBook() {
 		System.out.println("Book: enter id, title, value(sek), author, pages.");
-		// Scanner bParameter = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+		String userInput = scanner.nextLine();
+		String[] arguments = userInput.split(", ");
+		int id = 0, value = 0, nPages = 0;
+		String title = null, author = null;
 
+		try {
+			id = Integer.parseInt(arguments[0]);
+			title = arguments[1];
+			value = Integer.parseInt(arguments[2]);
+			author = arguments[3];
+			nPages = Integer.parseInt(arguments[4]);
+		} catch (Exception e) {
+			System.out.println("Failed to parse all attributes for a book.\nTry again.\n");
+			regBook();
+		}
+		Book book = new Book(id, title, value, author, nPages);
+		System.out.println(book);
+		scanner.close();
 		// System.exit(0);
-
 	}
 
 	public static void regMovie() {
