@@ -4,20 +4,35 @@ public class Movie extends Item {
 
 	private float rating;
 	private int runtime;
+	
+	//public static final int type = 1;
 
 	public Movie(int id, String title, int value, float rating, int runtime) {
 		super(id, title, value);
-		this.rating = rating;
-		this.runtime = runtime;
+		setRating(rating);
+		setRuntime(runtime);
 	}
+	
 
 	public float getRating() {
 		return rating;
 	}
 
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+
 	public int getRuntime() {
 		return runtime;
 	}
+
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
 
 	@Override
 	public String toString() {

@@ -4,20 +4,35 @@ public class Book extends Item {
 
 	private String author;
 	private int nPages;
+	
+	//public static final int type = 0;
 
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);
-		this.author = author;
-		this.nPages = pages;
+		setAuthor(author);
+		setnPages(pages);
 	}
+
 
 	public String getAuthor() {
 		return author;
 	}
 
-	public int getPages() {
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+
+	public int getnPages() {
 		return nPages;
 	}
+
+
+	public void setnPages(int nPages) {
+		this.nPages = nPages;
+	}
+
 
 	@Override
 	public String toString() {

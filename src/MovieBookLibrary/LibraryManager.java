@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryManager extends Main {
+public class LibraryManager {
 	static List<Item> libraryList = new ArrayList<Item>(); // listan som kallas på i LIST-kommandot, läser in både Movie
 															// och Book och skriver ut det i en lång lista
 	static List<Book> bookList = new ArrayList<Book>();
 	static List<Movie> movieList = new ArrayList<Movie>();
 
-	static String Not_Available;
-	static String In_Stock;
-	static String Does_Not_Exist;
+//	static String Not_Available;
+//	static String In_Stock;
+//	static String Does_Not_Exist;
 
 //	checkout	<artikelnummer>	
 //	Startar en dialog i konsolen som låter användaren ange ett namn och ett telefonnummer 
@@ -38,7 +38,8 @@ public class LibraryManager extends Main {
 		String[] arguments = userInput.split(", ");
 		int id = 0, value = 0, nPages = 0;
 		String title = null, author = null;
-
+		
+		
 		try {
 			id = Integer.parseInt(arguments[0]);
 			title = arguments[1];
@@ -135,9 +136,9 @@ public class LibraryManager extends Main {
 		}
 		try {
 			PrintWriter bookPrintWriter = new PrintWriter("Books.csv");
-			bookPrintWriter.println(Movie.getMovieCsvHeaderString());
-			for (Movie movie : movieList) {
-				String csvRecord = movie.movieCsvRecord();
+			bookPrintWriter.println(Book.getBookCsvHeaderString());
+			for (Book book : bookList) {
+				String csvRecord = book.bookCsvRecord();
 				bookPrintWriter.println(csvRecord);
 
 			}
