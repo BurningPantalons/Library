@@ -122,14 +122,26 @@ public class LibraryManager extends Main {
 
 		try {
 
-			PrintWriter printWriter = new PrintWriter("Movies.csv");
-			printWriter.println(Movie.getMovieCsvHeaderString());
+			PrintWriter moviePrintWriter = new PrintWriter("Movies.csv");
+			moviePrintWriter.println(Movie.getMovieCsvHeaderString());
 			for (Movie movie : movieList) {
 				String csvRecord = movie.movieCsvRecord();
-				printWriter.println(csvRecord);
+				moviePrintWriter.println(csvRecord);
 
 			}
-			printWriter.close();
+			moviePrintWriter.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			PrintWriter bookPrintWriter = new PrintWriter("Books.csv");
+			bookPrintWriter.println(Movie.getMovieCsvHeaderString());
+			for (Movie movie : movieList) {
+				String csvRecord = movie.movieCsvRecord();
+				bookPrintWriter.println(csvRecord);
+
+			}
+			bookPrintWriter.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
