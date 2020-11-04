@@ -1,18 +1,20 @@
 package MovieBookLibrary;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LibraryManager extends Main{
-	static List<Item> libraryList = new ArrayList<Item>(); //listan som kallas på i LIST-kommandot, läser in både Movie och Book och skriver ut det i en lång lista
+public class LibraryManager extends Main {
+	static List<Item> libraryList = new ArrayList<Item>(); // listan som kallas på i LIST-kommandot, läser in både Movie
+															// och Book och skriver ut det i en lång lista
 	static List<Book> bookList = new ArrayList<Book>();
 	static List<Movie> movieList = new ArrayList<Movie>();
-	
+
 	static String Not_Available;
 	static String In_Stock;
 	static String Does_Not_Exist;
-	
 
 //	checkout	<artikelnummer>	
 //	Startar en dialog i konsolen som låter användaren ange ett namn och ett telefonnummer 
@@ -21,7 +23,7 @@ public class LibraryManager extends Main{
 //
 //	checkin	<artikelnummer>	Tar tillbaka en utlånad produkt med artikelnummer <artikelnummer>. 
 //	Efter detta finns produkten i lager.
-	
+
 //	info <artikelnummer>	Skriver ut alla egenskaper hos produkten med artikelnummer
 //	<artikelnummer>
 //	
@@ -78,7 +80,7 @@ public class LibraryManager extends Main{
 //		// System.exit(0);
 //		return;
 //	}
-	
+
 	public static void regMovie() {
 		System.out.println("Movie: enter id, title, value(sek), rating, runtime.");
 		Scanner scanner = new Scanner(System.in);
@@ -101,9 +103,10 @@ public class LibraryManager extends Main{
 		Movie movie = new Movie(id, title, value, rating, runtime);
 		System.out.println(movie);
 		movieList.add(movie);
+
 		return;
 	}
-	
+
 //	private String changeItemState(){
 //		if (){ //här ska man kunna ändra böcker/filmer till "utlånade" eller "in stock"
 //			
@@ -112,4 +115,28 @@ public class LibraryManager extends Main{
 //			return "The item does not exist in the library.";
 //		}
 //	}
+
+//Funktion för utskrift av csv.
+
+	public static void ListWriter() {
+
+		try {
+
+			PrintWriter printWriter = new PrintWriter("Movies.csv");
+			printWriter.println(Movie.getMovieCsvHeaderString());
+			for (Movie movie : movieList) {
+				String csvRecord = movie.movieCsvRecord();
+				printWriter.println(csvRecord);
+
+			}
+			printWriter.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+/*
+ * uppdaterar csv-filerna under körtid - PrintWriter uppdaterar csv-filerna vid
+ * programavslut - flush
+ */

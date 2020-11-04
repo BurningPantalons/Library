@@ -1,6 +1,6 @@
 package MovieBookLibrary;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 	/*
@@ -14,7 +14,7 @@ public class Main {
 
 		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
-
+		LibraryManager.ListWriter();
 		while (running) {
 
 			String userInput = scanner.nextLine();
@@ -91,7 +91,7 @@ public class Main {
 				printUnknownCommand();
 				continue;
 			}
-			
+
 		}
 		scanner.close();
 	}
