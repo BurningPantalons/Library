@@ -11,7 +11,7 @@ public class Main {
 	 */
 
 	public static void main(String[] args) throws Exception {
-
+		
 		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
 		LibraryManager.ListWriter();
@@ -95,6 +95,11 @@ public class Main {
 		}
 		scanner.close();
 	}
+	
+	public void start() {
+		
+		
+	}
 
 	public static Command parseCommand(String userInput) {
 		String command = userInput;
@@ -108,9 +113,11 @@ public class Main {
 			return Command.DEREGISTER;
 
 		case "checkout":
+		case "out":
 			return Command.CHECKOUT;
 
 		case "checkin":
+		case "in":	
 			return Command.CHECKIN;
 
 		case "help":
