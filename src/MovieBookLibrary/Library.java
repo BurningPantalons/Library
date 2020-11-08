@@ -1,7 +1,12 @@
 package MovieBookLibrary;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 public class Library {
 
@@ -12,26 +17,26 @@ public class Library {
 			library = new LibraryManager(movBookPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("No file found at " + movBookPath);
-			System.out.println("Exiting");
-			System.exit(0);
 		}
-
-	}
-
-	public static void main(String[] args) {
-		Library lib = new Library("MovieBookLibrary.csv");
-		lib.start();
-
 	}
 
 	public void start() {
 		boolean running = true;
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("Hello user!\nWelcome to the Library!");
+		System.out.println("Enter command:\nFor help, write help + enter.");
+
 		while (running) {
 
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
+
+			if (command == Command.QUIT) {
+				handleQuitCommand();
+			} else if (command == Command.UNKNOWN) {
+				printUnknownCommand();
+				continue;
+			}
 
 			if (command == Command.REGISTER) {
 				System.out.println(
@@ -48,24 +53,12 @@ public class Library {
 			}
 
 			if (command == Command.DEREGISTER) {
-				System.out.println("Deregister item:\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
+				System.out.println("Enter product id for the item you want to remove from library:");
 
 				try {
-					String bookOrMovie = scanner.next(); // antingen gör man två metoder som i register, eller så gör
-															// man en metod som letar i bägge listorna. förmodligen det
-															// andra alternativet.
-					if (bookOrMovie.equals("b")) {
-						System.out.println("Enter book id you wish to remove");
+					int Id = scanner.nextInt();
+					library.deregister(Id);
 
-						System.exit(0);
-					} else if (bookOrMovie.equals("m")) {
-						System.out.println("Enter movie id you wish to remove");
-
-						System.exit(0);
-					} else {
-						printUnknownCommand();
-						continue;
-					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					return;
@@ -73,9 +66,15 @@ public class Library {
 			}
 
 			if (command == Command.CHECKOUT) {
+				System.out.println("Enter id for item you wish to borrow:");
+				String Id = userInput;
+				library.checkout(Id);
 			}
 
 			if (command == Command.CHECKIN) {
+				System.out.println("Enter id for the item you want to return");
+				String Id = userInput;
+				library.checkin(Id);
 			}
 
 			if (command == Command.HELP) {
@@ -84,19 +83,19 @@ public class Library {
 			}
 
 			if (command == Command.LIST) {
-
+				library.list();
 			}
 
 			if (command == Command.INFO) {
-			}
-
-			if (command == Command.QUIT) {
-				quit();
-			}
-
-			if (command == Command.UNKNOWN) {
-				printUnknownCommand();
-				continue;
+				System.out.println("Enter item Id:");
+				try {
+					String Id = scanner.next();
+					library.info(Id);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Could not parse argument as an Id\nTry again");
+					return;
+				}
 			}
 
 		}
@@ -112,6 +111,7 @@ public class Library {
 			return Command.REGISTER;
 
 		case "deregister":
+		case "delete":
 			return Command.DEREGISTER;
 
 		case "checkout":
@@ -148,12 +148,25 @@ public class Library {
 	}
 
 	public static void printHelp() {
-		System.out.println("helptext");
+		System.out.println(
+				"Basic commands:\n-Register(register) - Create a new library item\n-Deregister(deregister) - Delete a library item");
+		System.out.println("\n-Checkin(checkin) - Return a borrowed item\n-Checkout(checkout) - Borrow an item");
+		System.out.println(
+				"\n-List(list) - list all items in library\n-Info(info) - display more details about a specific item");
+		System.out.println(
+				"\nFor more details on alternate Command shortcuts, read the ReadMe file\nPress q to quit application.");
+
 	}
 
-	public static void quit() {
+	public static void handleQuitCommand() {
 		System.out.print("Exiting program.");
 		System.exit(0);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Library lib = new Library("MovieBookLibrary.csv");
+		lib.start();
+
 	}
 
 }

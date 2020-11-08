@@ -1,17 +1,18 @@
 package MovieBookLibrary;
 
+
 public class Book extends Item {
 
 	private String author;
 	private int nPages;
 
-	// public static final int type = 0;
 
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);
 		setAuthor(author);
 		setnPages(pages);
-
+		this.typeIdentifier = TYPE_BOOK;
+		this.stateIdentifier = STATE_IN_STOCK;
 	}
 
 	public String getAuthor() {
@@ -29,29 +30,34 @@ public class Book extends Item {
 	public void setnPages(int nPages) {
 		this.nPages = nPages;
 	}
+	
+	@Override
+	public String getTypeIdentifier() {
+		return TYPE_BOOK;
+	}
 
 	@Override
 	public String toString() {
-		return String.format("Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", id, title, value, author,
+		return String.format("%s Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", typeIdentifier, id, title, value, author,
 				nPages);
 	}
 
-	@Override
 	public String CsvRecord() {
-		return String.format("%d,%s,%d,%s,%d", id, title, value, author, nPages);
+		return String.format("%s,%d,%s,%d,%s,%d", typeIdentifier, id, title, value, author, nPages);
 	}
 
 	public static String getCsvHeaderString() {
-		return "id,title,value (Sek),author,number_of_pages";
+		return "type,id,title,value (Sek),author,number_of_pages";
 	}
 
 	public static Book parseBook(String csvRecord) {
 		String[] values = csvRecord.split(",");
-		int id = Integer.parseInt(values[0]);
-		String title = values[1];
-		int value = Integer.parseInt(values[2]);
-		String author = values[3];
-		int nPages = Integer.parseInt(values[4]);
+		String type = values[0];
+		int id = Integer.parseInt(values[1]);
+		String title = values[2];
+		int value = Integer.parseInt(values[3]);
+		String author = values[4];
+		int nPages = Integer.parseInt(values[5]);
 		return new Book(id, title, value, author, nPages);
 	}
 

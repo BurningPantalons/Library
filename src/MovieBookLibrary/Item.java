@@ -1,20 +1,23 @@
 package MovieBookLibrary;
 
-public abstract class Item {
+import org.apache.commons.csv.*;
+
+public abstract class Item implements ItemAttributes {
 
 	protected int id;
 	protected String title;
 	protected int value;
 	protected String customerName;
 	protected String customerNumber;
-
-	protected boolean borrowed = false;
+	protected String typeIdentifier = null;
+	protected String stateIdentifier = null;
 
 	public Item(int id, String title, int value) {
 		setId(id);
 		setTitle(title);
 		setValue(value);
-
+		setCustomerName(EMPTY_STRING);
+		setCustomerNumber(EMPTY_STRING);
 	}
 
 	public int getId() {
@@ -57,11 +60,20 @@ public abstract class Item {
 		this.customerNumber = customerNumber;
 	}
 
-	protected String CsvRecord() {
+	public String CsvRecord() {
 		return null;
 	}
 
-	
-	
-}
+	public String getTypeIdentifier() {
+		return typeIdentifier;
+	}
 
+	public void setItemState(String stateIdentifier) {
+		this.stateIdentifier = stateIdentifier;
+	}
+
+	public String getItemState() {
+		return stateIdentifier;
+	}
+
+}
