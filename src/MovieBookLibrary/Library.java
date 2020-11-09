@@ -11,11 +11,11 @@ import org.apache.commons.csv.CSVPrinter;
 
 public class Library {
 
-	private IntLibrary<Item> library;
+	private LibraryManager itemLibrary;
 
 	public Library(String movBookPath) {
 		try {
-			library = new LibraryManager(movBookPath);
+			itemLibrary = new LibraryManager(movBookPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -23,13 +23,14 @@ public class Library {
 
 	public void start() {
 		boolean running = true;
+		itemLibrary.readParseFile();
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Hello user!\nWelcome to the Library!");
-		System.out.println("Enter command:\nFor help, write help + enter.");
+		System.out.print("Hello user!\nWelcome to the Library!");
+		String userInput;
 
 		while (running) {
-
-			String userInput = scanner.nextLine();
+			System.out.printf("\nEnter command:\nFor help, write help + enter.\n>");
+			userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
 
 			if (command == Command.QUIT) {
@@ -40,13 +41,11 @@ public class Library {
 			}
 
 			if (command == Command.REGISTER) {
-				System.out.println(
-						"What kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
-
+				System.out.print(
+						"\nWhat kind of item do you want to register?\nfor Book, press (b) + enter\nfor Movie, press (m) + enter.");
 				try {
-					String bookOrMovie = scanner.next();
-					library.register(bookOrMovie);
-
+					String bookOrMovie = scanner.nextLine();
+					itemLibrary.register(bookOrMovie);
 				} catch (Exception e) {
 					e.printStackTrace();
 					return;
@@ -54,32 +53,31 @@ public class Library {
 			}
 
 			if (command == Command.DEREGISTER) {
-				library.searchLibrary("Deregister");
+				itemLibrary.searchLibrary("Deregister");
 			}
 
 			if (command == Command.CHECKOUT) {
-				library.searchLibrary("Checkout");
+				itemLibrary.searchLibrary("Checkout");
 			}
 
 			if (command == Command.CHECKIN) {
-				library.searchLibrary("Checkin");
+				itemLibrary.searchLibrary("Checkin");
 			}
 
 			if (command == Command.HELP) {
 				printHelp();
-				continue;
 			}
 
 			if (command == Command.LIST) {
-				library.list();
+				itemLibrary.list();
 			}
 
 			if (command == Command.INFO) {
-				library.searchLibrary("Info");
+				itemLibrary.searchLibrary("Info");
 			}
 
 		}
-		scanner.close();
+		//scanner.close();
 	}
 
 	public static Command parseCommand(String userInput) {
@@ -123,29 +121,29 @@ public class Library {
 	}
 
 	public static void printUnknownCommand() {
-		System.out.println("Unknown command, please try again");
+		System.out.print("\nUnknown command, please try again");
 		return;
 	}
 
 	public static void printHelp() {
-		System.out.println(
-				"Basic commands:\n-Register(register) - Create a new library item\n-Deregister(deregister) - Delete a library item");
-		System.out.println("\n-Checkin(checkin) - Return a borrowed item\n-Checkout(checkout) - Borrow an item");
-		System.out.println(
+		System.out.print(
+				"\nBasic commands:\n-Register(register) - Create a new library item\n-Deregister(deregister) - Delete a library item");
+		System.out.print("\n-Checkin(checkin) - Return a borrowed item\n-Checkout(checkout) - Borrow an item");
+		System.out.print(
 				"\n-List(list) - list all items in library\n-Info(info) - display more details about a specific item");
-		System.out.println(
+		System.out.print(
 				"\nFor more details on alternate Command shortcuts, read the ReadMe file\nPress q to quit application.");
 
 	}
 
 	public static void handleQuitCommand() {
-		System.out.print("Exiting program.");
+		System.out.print("\nExiting program.");
 		System.exit(0);
 	}
 
 	public static void main(String[] args) throws IOException {
-
-		Library lib = new Library("MovieBookLibrary.csv");
+		
+		Library lib = new Library("MovieBookLibrary.txt");
 		lib.start();
 
 	}
