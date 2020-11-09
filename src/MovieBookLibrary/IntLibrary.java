@@ -6,12 +6,14 @@ public interface IntLibrary<T> {
 
 	abstract void deregister(int index);
 
-	abstract void checkout(String argument);	
+	abstract void checkout(int Id);	
 
-	abstract void checkin(String argument);	
+	abstract void checkin(int Id);	
 	
-	abstract void info(String argument); 
+	abstract void info(int Id); 
 	
 	abstract void list();
+
+	abstract void searchLibrary(String string);
 
 }
