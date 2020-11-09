@@ -1,11 +1,9 @@
 package MovieBookLibrary;
 
-
 public class Book extends Item {
 
 	private String author;
 	private int nPages;
-
 
 	public Book(int id, String title, int value, String author, int pages) {
 		super(id, title, value);
@@ -30,7 +28,7 @@ public class Book extends Item {
 	public void setnPages(int nPages) {
 		this.nPages = nPages;
 	}
-	
+
 	@Override
 	public String getTypeIdentifier() {
 		return TYPE_BOOK;
@@ -38,8 +36,8 @@ public class Book extends Item {
 
 	@Override
 	public String toString() {
-		return String.format("%s Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", typeIdentifier, id, title, value, author,
-				nPages);
+		return String.format("%s Id: %d, Title: %s, Value(sek): %dkr, Author: %s, Pages: %d", typeIdentifier, id, title,
+				value, author, nPages);
 	}
 
 	public String CsvRecord() {

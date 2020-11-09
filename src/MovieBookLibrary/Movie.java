@@ -4,7 +4,6 @@ public class Movie extends Item {
 
 	private float rating;
 	private int runtime;
-	
 
 	public Movie(int id, String title, int value, float rating, int runtime) {
 		super(id, title, value);
@@ -32,15 +31,14 @@ public class Movie extends Item {
 
 	@Override
 	public String toString() {
-		return String.format("%s Id: %d, Title: %s, Value(sek): %dkr, Rating: %.2f, Runtime: %dmin", typeIdentifier, id, title, value,
-				rating, runtime);
+		return String.format("%s Id: %d, Title: %s, Value(sek): %dkr, Rating: %.2f, Runtime: %dmin", typeIdentifier, id,
+				title, value, rating, runtime);
 	}
-	
+
 	@Override
 	public String getTypeIdentifier() {
 		return TYPE_MOVIE;
 	}
-	
 
 	@Override
 	public String CsvRecord() {
