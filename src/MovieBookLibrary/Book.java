@@ -50,15 +50,4 @@ public class Book extends Item {
 		return "type,id,title,value (Sek),author,number_of_pages";
 	}
 
-	public static Book parseBook(String csvRecord) {
-		String[] values = csvRecord.split(",");
-		String type = values[0];
-		int id = Integer.parseInt(values[1]);
-		String title = values[2];
-		int value = Integer.parseInt(values[3]);
-		String author = values[4];
-		int nPages = Integer.parseInt(values[5]);
-		return new Book(id, title, value, author, nPages);
-	}
-
 }

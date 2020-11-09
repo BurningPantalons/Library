@@ -51,14 +51,4 @@ public class Movie extends Item {
 		return "type,id,title,value (Sek),imdb_rating,runtime (minutes)";
 	}
 
-	public static Movie parseMovie(String csvRecord) {
-		String[] values = csvRecord.split(",");
-		String type = values[0];
-		int id = Integer.parseInt(values[1]);
-		String title = values[2];
-		int value = Integer.parseInt(values[3]);
-		float rating = Float.parseFloat(values[4]);
-		int runtime = Integer.parseInt(values[5]);
-		return new Movie(id, title, value, rating, runtime);
-	}
 }
