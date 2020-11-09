@@ -1,5 +1,6 @@
 package MovieBookLibrary;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,28 +54,15 @@ public class Library {
 			}
 
 			if (command == Command.DEREGISTER) {
-				System.out.println("Enter product id for the item you want to remove from library:");
-
-				try {
-					int Id = scanner.nextInt();
-					library.deregister(Id);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					return;
-				}
+				library.searchLibrary("Deregister");
 			}
 
 			if (command == Command.CHECKOUT) {
-				System.out.println("Enter id for item you wish to borrow:");
-				String Id = userInput;
-				library.checkout(Id);
+				library.searchLibrary("Checkout");
 			}
 
 			if (command == Command.CHECKIN) {
-				System.out.println("Enter id for the item you want to return");
-				String Id = userInput;
-				library.checkin(Id);
+				library.searchLibrary("Checkin");
 			}
 
 			if (command == Command.HELP) {
@@ -87,15 +75,7 @@ public class Library {
 			}
 
 			if (command == Command.INFO) {
-				System.out.println("Enter item Id:");
-				try {
-					String Id = scanner.next();
-					library.info(Id);
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Could not parse argument as an Id\nTry again");
-					return;
-				}
+				library.searchLibrary("Info");
 			}
 
 		}
@@ -164,6 +144,7 @@ public class Library {
 	}
 
 	public static void main(String[] args) throws IOException {
+
 		Library lib = new Library("MovieBookLibrary.csv");
 		lib.start();
 
