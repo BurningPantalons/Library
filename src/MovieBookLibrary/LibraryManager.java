@@ -1,5 +1,6 @@
 package MovieBookLibrary;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,16 +16,17 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 
 	private List<Item> libraryList = new ArrayList<Item>();
 	private String movBookPath;
-
+	private Scanner sc = new Scanner(System.in);
+	
 	public LibraryManager(String movBookPath) throws FileNotFoundException {
 		this.movBookPath = movBookPath;
-		parseItems(movBookPath);
+
 	}
 
 	@Override
 	public void register(String argument) {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter id:\n");
+		
+		System.out.print("\nEnter id:");
 		int id = 0;
 
 		try {
@@ -33,7 +35,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			e.printStackTrace();
 		}
 
-		System.out.print("Enter title:");
+		System.out.print("\nEnter title:");
 		String title = null;
 		try {
 			title = sc.nextLine();
@@ -48,7 +50,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			e.printStackTrace();
 		}
 		if (argument.equals("b")) {
-			System.out.println("Enter Author:");
+			System.out.print("\nEnter Author:");
 			String author = null;
 			try {
 				author = sc.nextLine();
@@ -56,7 +58,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 				e.printStackTrace();
 
 			}
-			System.out.println("Enter number of pages:");
+			System.out.print("\nEnter number of pages:");
 			int nPages = 0;
 			try {
 				nPages = Integer.parseInt(sc.nextLine());
@@ -64,7 +66,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 				e.printStackTrace();
 			}
 			libraryList.add(new Book(id, title, value, author, nPages));
-			sc.close();
+			//sc.close();
 			try {
 				writeItems();
 			} catch (IOException e) {
@@ -72,22 +74,22 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			}
 			return;
 		} else if (argument.equals("m")) {
-			System.out.println("Enter Imdb rating:");
+			System.out.print("\nEnter Imdb rating:");
 			float rating = 0.0f;
 			try {
-				rating = Float.parseFloat(sc.next());
+				rating = Float.parseFloat(sc.nextLine());
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Enter runtime (mins):");
+			System.out.print("\nEnter runtime (mins):");
 			int runtime = 0;
 			try {
-				runtime = Integer.parseInt(sc.next());
+				runtime = Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
 			libraryList.add(new Movie(id, title, value, rating, runtime));
-			sc.close();
+			//sc.close();
 			try {
 				writeItems();
 			} catch (IOException e) {
@@ -95,32 +97,32 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			}
 			return;
 		} else {
-			System.out.println(
-					"Arguments not valid.\nPlease try again.\nFor book, press (b) + enter.\nFor movie, press (m) + enter.");
-			String newArg = sc.next();
+			System.out.print(
+					"\nArguments not valid.\nPlease try again.\nFor book, press (b) + enter.\nFor movie, press (m) + enter.");
+			String newArg = sc.nextLine();
 			register(newArg);
 			return;
 		}
-		
+
 	}
 
-	private List<Item> parseItems(String movBookPath) throws FileNotFoundException {
+	public void readParseFile() {
+		try {
+			Scanner scanner = new Scanner(new File(movBookPath));
 
-		FileReader reader = new FileReader(movBookPath);
-		Scanner scanner = new Scanner(reader);
-
-		if (movBookPath.isBlank()) {
-			System.out.println("Could not find any information on items to parse.\nProceeding to start application.");
-			scanner.close();
-			return null;
-		} else
-			try {
+			if (movBookPath.isBlank()) {
+				System.out
+						.print("\nCould not find any information on items to parse.\nProceeding to start application.");
+				scanner.close();
+				return;
+			} else
 				while (scanner.hasNextLine()) {
 					String csvRecord = scanner.nextLine();
 					String[] recordValues = csvRecord.split(",");
 					if (csvRecord.equals(Movie.getCsvHeaderString()) || csvRecord.equals(Book.getCsvHeaderString())) {
 						scanner.nextLine();
-					} else if (recordValues[0].equals(TYPE_BOOK)) {						
+					}
+					if (recordValues[0].equals(TYPE_BOOK)) {
 						int id = Integer.parseInt(recordValues[1]);
 						String title = recordValues[2];
 						int value = Integer.parseInt(recordValues[3]);
@@ -128,7 +130,8 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 						int nPages = Integer.parseInt(recordValues[5]);
 						Book book = new Book(id, title, value, author, nPages);
 						libraryList.add(book);
-					} else if (recordValues[0].equals(TYPE_MOVIE)) {						
+					}
+					if (recordValues[0].equals(TYPE_MOVIE)) {
 						int id = Integer.parseInt(recordValues[1]);
 						String title = recordValues[2];
 						int value = Integer.parseInt(recordValues[3]);
@@ -137,43 +140,41 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 						Movie movie = new Movie(id, title, value, rating, runtime);
 						libraryList.add(movie);
 					}
+
+					// System.out.println("parseItems");
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("parseItems");
-			}
-		scanner.close();
-		return null;
+			//scanner.close();
+			return;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void createCsvFile() throws IOException {
-		CSVPrinter pW = new CSVPrinter(new FileWriter("MovieBookLibrary.csv"), CSVFormat.DEFAULT);
+	private void writeItems() throws IOException {
+		CSVPrinter pW = new CSVPrinter(new FileWriter(movBookPath), CSVFormat.DEFAULT);
 		String bookHeader = Book.getCsvHeaderString();
 		String movieHeader = Movie.getCsvHeaderString();
 		pW.printRecord(bookHeader);
 		pW.printRecord(movieHeader);
-		return;
-	}
-
-	private void writeItems() throws IOException {
-		CSVPrinter pW = new CSVPrinter(new FileWriter("MovieBookLibrary.csv"), CSVFormat.DEFAULT);
-
 		try {
 			for (Item item : libraryList) {
 				if (item.getTypeIdentifier().equals(TYPE_BOOK)) {
-					pW.printRecord(item);
+					Book book = (Book) item;
+					pW.printRecord(item.getTypeIdentifier(), item.getId(), item.getTitle(), item.getValue(),
+							book.getAuthor(), book.getnPages());
 				} else if (item.getTypeIdentifier().equals(TYPE_MOVIE)) {
-					pW.printRecord(item);
-				} else {
-
+					Movie movie = (Movie) item;
+					pW.printRecord(item.getTypeIdentifier(), item.getId(), item.getTitle(), item.getValue(),
+							movie.getRating(), movie.getRuntime());
 				}
 			}
-			System.out.printf("All items successfully written to file.\n");
+			System.out.printf("\nAll items successfully written to file.");
 			pW.close();
-			list();
 			return;
 		} catch (IOException e) {
-			System.out.println("writeItems");
+			System.out.print("\nwriteItems-fel");
 			e.printStackTrace();
 			return;
 		}
@@ -181,7 +182,6 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 	}
 
 	public void searchLibrary(String argument) {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Id number:\n>");
 		int Id = Integer.parseInt(sc.next());
 
@@ -192,19 +192,19 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 					int Index = libraryList.indexOf(item);
 					info(Index);
 				}
-				else if (argument.equals("Checkin")) {
+				if (argument.equals("Checkin")) {
 					int Index = libraryList.indexOf(item);
 					checkin(Index);
 				}
-				else if (argument.equals("Checkout")) {
+				if (argument.equals("Checkout")) {
 					int Index = libraryList.indexOf(item);
 					checkin(Index);
 				}
-				else if (argument.equals("Deregister")) {
+				if (argument.equals("Deregister")) {
 					int Index = libraryList.indexOf(item);
 					deregister(Index);
 				}
-				
+
 			} else if (libraryList.contains(Id) != EXIST) {
 				System.out.println("Item Id does not exist.\n");
 				return;
@@ -228,17 +228,15 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			return;
 		} else {
 			System.out.println("checkout-borrow");
-			Scanner customerSc = new Scanner(System.in);
 			String customerName, customerNumber;
 			System.out.println("Enter name for person borrowing this item:");
-			customerName = customerSc.nextLine();
+			customerName = sc.nextLine();
 			System.out.println("Enter number for person borrowing this item:");
-			customerNumber = customerSc.nextLine();
+			customerNumber = sc.nextLine();
 			item.stateIdentifier = STATE_NOT_AVAILABLE;
 			item.setCustomerName(customerName);
 			item.setCustomerNumber(customerNumber);
 			System.out.println("Item borrowed to: " + customerName + " number: " + customerNumber);
-			customerSc.close();
 			return;
 		}
 	}
@@ -291,7 +289,6 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 		try {
 			if (libraryList.isEmpty()) {
 				System.out.println("The list is empty.");
-				System.out.println("Enter command:\nFor help, write help + enter.");
 				return;
 			} else {
 				for (Item item : libraryList) {
@@ -302,8 +299,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 								item.customerName, item.customerNumber);
 					}
 				}
-				System.out.println("Enter command:\nFor help, write help + enter.\n");
-				return;
+
 			}
 		} catch (NullPointerException e) {
 			e.printStackTrace();
