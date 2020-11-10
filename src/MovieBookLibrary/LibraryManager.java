@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import org.apache.commons.csv.*;
 
-public class LibraryManager extends Exceptions implements IntLibrary<Item>, ItemAttributes {
+public class LibraryManager implements IntLibrary<Item>, ItemAttributes {
 
 	private List<Item> libraryList = new ArrayList<Item>();
 	private String movBookPath;
@@ -96,7 +96,6 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 							book.setCustomerName(recordValues[7]);
 							book.setCustomerNumber(recordValues[8]);
 						}
-						
 
 					}
 					if (recordValues[0].equals(TYPE_MOVIE)) {
@@ -112,7 +111,6 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 							movie.setCustomerName(recordValues[7]);
 							movie.setCustomerNumber(recordValues[8]);
 						}
-						
 
 					}
 
@@ -127,7 +125,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 		System.out.println("Enter Id number:\n>");
 		int Id = 0;
 		try {
-			Id = Integer.parseInt(sc.next());
+			Id = Integer.parseInt(sc.nextLine());
 		} catch (NumberFormatException e) {
 			System.out.println("Failed to recognize Id number.\nTry again");
 		}
@@ -203,7 +201,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 				e.printStackTrace();
 			}
 			libraryList.add(new Book(id, title, value, author, nPages));
-			// sc.close();
+
 			try {
 				writeItems();
 			} catch (IOException e) {
@@ -226,7 +224,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 				e.printStackTrace();
 			}
 			libraryList.add(new Movie(id, title, value, rating, runtime));
-			// sc.close();
+
 			try {
 				writeItems();
 			} catch (IOException e) {
@@ -246,20 +244,19 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 	@Override
 	public void checkout(int Id) {
 		int index = Id;
-		// System.out.println("checkout:start");
 		Item item = libraryList.get(index);
+		
 		if (item.stateIdentifier == STATE_NOT_AVAILABLE) {
 			System.out.println("Item already borrowed out");
 			return;
 		} else {
-			// System.out.println("checkout-borrow");
+
 			String customerName = EMPTY_STRING;
 			String customerNumber = EMPTY_STRING;
 			System.out.println("\nEnter name for person borrowing this item:");
 			System.out.println(">");
 
 			try {
-				sc.nextLine();
 				customerName = sc.nextLine();
 				item.setCustomerName(customerName);
 				System.out.println("\nEnter number for person borrowing this item:");
@@ -277,7 +274,6 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return;
 
 		}
 	}
@@ -324,22 +320,24 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 			if (item.typeIdentifier == TYPE_BOOK) {
 				Book book = (Book) item;
 				System.out.println(book.toString());
-				// System.out.println("Info:book.tostring");
+
 			} else if (item.typeIdentifier == TYPE_MOVIE) {
 				Movie movie = (Movie) item;
 				System.out.println(movie.toString());
-				// System.out.println("Info:movie.tostring");
 			}
 
-			// System.out.println("info-in-stock");
-
 		} else if (item.stateIdentifier == STATE_NOT_AVAILABLE) {
-			System.out.printf(item.toString() + "\nBorrowed by: " + item.getCustomerName() + "number: "
-					+ item.getCustomerNumber());
-			System.out.println("info-borrowed");
+			if (item.typeIdentifier == TYPE_BOOK) {
+				Book book = (Book) item;
+				System.out.printf(book.toString() + "\nBorrowed by: " + item.getCustomerName() + "number: "
+						+ item.getCustomerNumber());
 
+			} else if (item.typeIdentifier == TYPE_MOVIE) {
+				Movie movie = (Movie) item;
+				System.out.println(movie.toString() + "\nBorrowed by: " + item.getCustomerName() + "number: "
+						+ item.getCustomerNumber());
+			}
 		}
-		return;
 	}
 
 	@Override
@@ -349,6 +347,7 @@ public class LibraryManager extends Exceptions implements IntLibrary<Item>, Item
 				System.out.println("The list is empty.");
 				return;
 			} else {
+				System.out.println("Current inventory:");
 				for (Item item : libraryList) {
 					if (item.stateIdentifier == STATE_IN_STOCK) {
 						System.out.printf("%s,%d,%s,%s\n", item.typeIdentifier, item.id, item.title, STATE_IN_STOCK);
