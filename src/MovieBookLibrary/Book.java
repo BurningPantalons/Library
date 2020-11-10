@@ -41,11 +41,11 @@ public class Book extends Item {
 	}
 
 	public String CsvRecord() {
-		return String.format("%s,%d,%s,%d,%s,%d", typeIdentifier, id, title, value, author, nPages);
+		return String.format("%s,%d,%s,%d,%s,%d,%s,%s,%s", typeIdentifier, id, title, value, author, nPages, stateIdentifier, customerName, customerNumber);
 	}
 
 	public static String getCsvHeaderString() {
-		return "type,id,title,value (Sek),author,number_of_pages";
+		return "Book,Id,Title,Value,Author,Number of pages,state,customerName,customerNumber";
 	}
 
 }

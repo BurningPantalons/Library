@@ -42,11 +42,11 @@ public class Movie extends Item {
 
 	@Override
 	public String CsvRecord() {
-		return String.format("%s,%d,%s,%d,%.2f,%d", typeIdentifier, id, title, value, rating, runtime);
+		return String.format("%s,%d,%s,%d,%.2f,%d,%s,%s,%s", typeIdentifier, id, title, value, rating, runtime, stateIdentifier, customerName, customerNumber);
 	}
 
 	public static String getCsvHeaderString() {
-		return "type,id,title,value (Sek),imdb_rating,runtime (minutes)";
+		return "Movie,Id,Title,Value,Imdb rating,Runtime (minutes),state,customerName,customerNumber";
 	}
 
 }

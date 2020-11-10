@@ -1,7 +1,5 @@
 package MovieBookLibrary;
 
-import org.apache.commons.csv.*;
-
 public abstract class Item implements ItemAttributes {
 
 	protected int id;
