@@ -1,6 +1,6 @@
 README
 
-Arbetet gjort av David Engvall och Isabel Hero Andersson
+Arbetet gjort av David Engvall (BurningPantalons) och Isabel Hero Andersson (326933)
 
 -Projektet bör kunna startas och hitta filen MovieBookLibrary.txt direkt och parsea 
 den till fungerande lista-
