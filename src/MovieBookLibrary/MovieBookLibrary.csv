@@ -1,8 +1,0 @@
-type,id,title,value (Sek),author,number_of_pages
-(book),101, To kill a mockingbird, 157, Harper Lee, 288
-(book),102, The great Gatsby, 148, F. Scott Fitzgerald, 231
-(book),103, The Hitchhiker is guide to the Galaxy, 89, Douglas Adams, 208
-type,id,title,value (Sek),imdb_rating,runtime (minutes)
-(movie),201, The Shawshank Redemption, 79, 9.3, 142
-(movie),202, The Godfather, 99, 9.3, 175
-(movie),203, The Dark Knight, 99, 9.0, 152
